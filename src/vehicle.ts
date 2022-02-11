@@ -125,7 +125,7 @@ export class Vehicle {
    */
   bicycle(): string {
     return this.faker.random.arrayElement(
-      this.faker.definitions.vehicle.bicycle
+      this.faker.definitions.vehicle.bicycle_type
     );
   }
 }

@@ -173,7 +173,7 @@ describe('vehicle', () => {
 
           expect(bicycle).toBeTruthy();
           expect(typeof bicycle).toBe('string');
-          expect(faker.definitions.vehicle.bicycle).toContain(bicycle);
+          expect(faker.definitions.vehicle.bicycle_type).toContain(bicycle);
         });
       });
     }

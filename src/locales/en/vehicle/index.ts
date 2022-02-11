@@ -6,7 +6,7 @@ import model from './model';
 import type_ from './type';
 
 const vehicle = {
-  bicycle,
+  bicycle_type: bicycle,
   fuel,
   manufacturer,
   model,
