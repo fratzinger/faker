@@ -7,7 +7,7 @@ export interface VehicleDefinitions {
   /**
    * Some types of bicycles.
    */
-  bicycle_type: string[];
+  bicycle: string[];
   /**
    * Some types of fuel (e.g. `Gasoline`).
    */
@@ -30,7 +30,7 @@ export interface VehicleDefinitions {
  * Internal: A list of all keys for the VehicleDefinitions.
  */
 export const VEHICLE = allOf<keyof VehicleDefinitions>()(
-  'bicycle_type',
+  'bicycle',
   'fuel',
   'manufacturer',
   'model',
