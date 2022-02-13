@@ -15,7 +15,7 @@ specifiers:
   eslint-config-prettier: ~8.3.0
   eslint-define-config: ~1.2.4
   eslint-gitignore: ~0.1.0
-  eslint-plugin-jsdoc: ~37.9.0
+  eslint-plugin-jsdoc: ~37.9.1
   eslint-plugin-prettier: ~4.0.0
   esno: ~0.14.1
   lint-staged: ~12.3.3
@@ -48,7 +48,7 @@ devDependencies:
   eslint-config-prettier: 8.3.0_eslint@8.9.0
   eslint-define-config: 1.2.4
   eslint-gitignore: 0.1.0_eslint@8.9.0
-  eslint-plugin-jsdoc: 37.9.0_eslint@8.9.0
+  eslint-plugin-jsdoc: 37.9.1_eslint@8.9.0
   eslint-plugin-prettier: 4.0.0_07b422646bb75d3db791621d4fdbc992
   esno: 0.14.1
   lint-staged: 12.3.3
@@ -1843,8 +1843,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-jsdoc/37.9.0_eslint@8.9.0:
-    resolution: {integrity: sha512-2OXC+bI5Ypjkj+cZWPOfq9Bidx+q9GqUKfAix9SaX4qsSLx3AVfSqOhn/FFW4eoofQ95ZeF1Jwarwa/Z4dJ4mA==}
+  /eslint-plugin-jsdoc/37.9.1_eslint@8.9.0:
+    resolution: {integrity: sha512-ynIsYL+rOtIKWOttAYWCgOJawPwYKexcX3cuoYHwifvz4+uY+MZ2un5nMHBULigdSITnQ5/ZSHpO/O1nwv/uJA==}
     engines: {node: ^12 || ^14 || ^16 || ^17}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0
