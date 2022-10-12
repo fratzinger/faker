@@ -51,6 +51,7 @@ function modulesList(): { [module: string]: string[] } {
     .sort()
     .filter(isTestableModule)
     .reduce((result, mod) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const methods = Object.keys(faker[mod]).filter(isMethodOf(mod));
       if (methods.length) {
         result[mod] = methods;
@@ -98,7 +99,7 @@ describe('functional tests', () => {
   }
 });
 
-describe('faker.fake functional tests', () => {
+describe('faker.helpers.fake functional tests', () => {
   for (const locale in faker.locales) {
     describe(locale, () => {
       Object.keys(modules).forEach((module) => {
@@ -108,7 +109,7 @@ describe('faker.fake functional tests', () => {
               faker.locale = locale;
               // TODO ST-DDT 2022-03-28: Use random seed once there are no more failures
               faker.seed(1);
-              const result = faker.fake(`{{${module}.${meth}}}`);
+              const result = faker.helpers.fake(`{{${module}.${meth}}}`);
 
               expect(result).toBeTypeOf('string');
             });

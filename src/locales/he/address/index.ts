@@ -5,8 +5,7 @@
 import type { AddressDefinitions } from '../../..';
 import building_number from './building_number';
 import city from './city';
-import city_prefix from './city_prefix';
-import city_suffix from './city_suffix';
+import city_name from './city_name';
 import country from './country';
 import county from './county';
 import default_country from './default_country';
@@ -16,16 +15,16 @@ import postcode from './postcode';
 import secondary_address from './secondary_address';
 import state from './state';
 import state_abbr from './state_abbr';
+import street from './street';
 import street_address from './street_address';
 import street_name from './street_name';
-import street_suffix from './street_suffix';
+import street_prefix from './street_prefix';
 import time_zone from './time_zone';
 
-const address = {
+const address: AddressDefinitions = {
   building_number,
   city,
-  city_prefix,
-  city_suffix,
+  city_name,
   country,
   county,
   default_country,
@@ -35,10 +34,11 @@ const address = {
   secondary_address,
   state,
   state_abbr,
+  street,
   street_address,
   street_name,
-  street_suffix,
+  street_prefix,
   time_zone,
-} as Partial<AddressDefinitions>;
+};
 
 export default address;

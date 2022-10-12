@@ -3,12 +3,12 @@
  * Run 'pnpm run generate:locales' to update.
  */
 import type { CompanyDefinitions } from '../../..';
-import name_ from './name';
+import name_patterns from './name_patterns';
 import prefix from './prefix';
 
-const company = {
-  name: name_,
+const company: CompanyDefinitions = {
+  name_patterns,
   prefix,
-} as Partial<CompanyDefinitions>;
+};
 
 export default company;

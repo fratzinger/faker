@@ -1,6 +1,11 @@
 import { resolve } from 'node:path';
 import type { Options } from 'prettier';
 import { format } from 'prettier';
+import type {
+  CommentDisplayPart,
+  CommentTag,
+  SignatureReflection,
+} from 'typedoc';
 import * as TypeDoc from 'typedoc';
 import prettierConfig from '../../.prettierrc.cjs';
 import {
@@ -32,7 +37,7 @@ export function newTypeDocApp(): TypeDoc.Application {
     parameterDefaultReader
   );
   // Add to debug json output
-  app.serializer.addSerializer(new DefaultParameterAwareSerializer(undefined));
+  app.serializer.addSerializer(new DefaultParameterAwareSerializer());
 
   return app;
 }
@@ -75,3 +80,80 @@ const prettierTypescript: Options = {
   ...prettierConfig,
   parser: 'typescript',
 };
+
+/**
+ * Extracts the text (md) from a jsdoc tag.
+ *
+ * @param tag The tag to extract the text from.
+ * @param signature The signature to extract the text from.
+ */
+export function extractTagContent(
+  tag: `@${string}`,
+  signature?: SignatureReflection,
+  tagProcessor: (tag: CommentTag) => string[] = joinTagContent
+): string[] {
+  return signature?.comment?.getTags(tag).flatMap(tagProcessor) ?? [];
+}
+
+/**
+ * Extracts the examples from the jsdocs without the surrounding md code block.
+ *
+ * @param signature The signature to extract the examples from.
+ */
+export function extractRawExamples(signature?: SignatureReflection): string[] {
+  return extractTagContent('@example', signature).map((tag) =>
+    tag.replace(/^```ts\n/, '').replace(/\n```$/, '')
+  );
+}
+
+/**
+ * Extracts all the `@see` references from the jsdocs separately.
+ *
+ * @param signature The signature to extract the see also references from.
+ */
+export function extractSeeAlsos(signature?: SignatureReflection): string[] {
+  return extractTagContent('@see', signature, (tag) => {
+    const content = tag.content;
+    if (content.length === 1) {
+      return joinTagContent(tag);
+    }
+    return tag.content
+      .filter((_, index) => index % 3 === 1) // ['-', 'content', '\n']
+      .map((part) => part.text);
+  });
+}
+
+/**
+ * Joins the parts of the given jsdocs tag.
+ */
+export function joinTagContent(tag: CommentTag): string[] {
+  return [joinTagParts(tag?.content)];
+}
+
+export function joinTagParts(parts: CommentDisplayPart[]): string;
+export function joinTagParts(parts?: CommentDisplayPart[]): string | undefined;
+export function joinTagParts(parts?: CommentDisplayPart[]): string | undefined {
+  return parts?.map((part) => part.text).join('');
+}
+
+/**
+ * Checks if the given signature is deprecated.
+ *
+ * @param signature The signature to check.
+ *
+ * @returns `true` if it is deprecated, otherwise `false`.
+ */
+export function isDeprecated(signature: SignatureReflection): boolean {
+  return extractTagContent('@deprecated', signature).length > 0;
+}
+
+/**
+ * Extracts the "since" tag from the provided signature.
+ *
+ * @param signature The signature to check.
+ *
+ * @returns the contents of the @since tag
+ */
+export function extractSince(signature: SignatureReflection): string {
+  return extractTagContent('@since', signature).join().trim();
+}

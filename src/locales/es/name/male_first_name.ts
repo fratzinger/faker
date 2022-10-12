@@ -10,9 +10,11 @@ export default [
   'Miguel',
   'Jorge',
   'Sergi',
-  'Josep',
   'Ricardo',
   'Carles',
   'Jordi',
-  'Manuel',
+  'Pío',
+  'Pablo',
+  'Juan Ramón',
+  'Hermenegildo',
 ];
